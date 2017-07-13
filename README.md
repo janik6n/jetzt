@@ -21,15 +21,15 @@ Things should probably work nicely on earlier releases of macOS / OS X and on Li
 ## Usage
 
 1. Clone this repo to your local development machine.
-1. Add new *environment variable* `DEVHOME` to your `.bash_profile`
+1. Add new *environment variable* `DEVHOME` to your `.bash_profile`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
-1. Optional: Create a shortcut for the Bash Shell Script to your `.bash_profile`
+1. Optional: Create a shortcut for the Bash Shell Script to your `.bash_profile`.
     - e.g. `alias npp='. /Users/me/Projects/scaffold-project/new-python-project.sh'`
 1. Run the script with `npp` (should you have selected this as an alias) and follow the prompt.
 
 ## Contribution
 
-You want to contribute to this little project? Raise an issue first, let's discuss.
+You want to contribute to this little project? Raise an issue first, let's discuss about your idea.
 
 ## License
 
