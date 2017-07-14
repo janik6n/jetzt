@@ -2,7 +2,7 @@
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
 read -p 'Name your new project: ' project_name
-mydir=$(python3 /Users/janik/Devs/Projects/scaffold-project/project-setup.py $DEVHOME "$project_name" 2>&1)
+mydir=$(python3 $DEVHOME/scaffold-project/python-project-setup.py $DEVHOME "$project_name" 2>&1)
 
 if [[ "$mydir" == "already_exists" ]]
 then
