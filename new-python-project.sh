@@ -27,13 +27,42 @@ else
 	echo ""
 	echo "Base project creation complete."
 
-	# read -p "Would you like to scaffold a specific project (y/n)? " additional_stuff
-	# if [[ "$additional_stuff" == "y" || "$additional_stuff" == "Y" ]]
-	# then
-	# 	echo "Scaffolding further..."
-	# else
-	# 	echo "Project creation complete. Happy coding!"
-	# fi
+	read -p "Would you like to scaffold a specific project (y/n)? " additional_stuff
+	if [[ "$additional_stuff" == "y" || "$additional_stuff" == "Y" ]]
+	then
+		echo "Scaffolding further..."
+		read -p "What kind of project would yo like to do (flask, jupyter)? " project_type
+		if [[ "$project_type" == "flask" ]]
+		then
+			echo "Installing requirements for a Flask project..."
+			pip install Flask
+			pip freeze > requirements.txt
+		elif [[ "$project_type" == "jupyter" ]]
+		then
+			echo "Installing requirements for a Jupyter project..."
+			pip install jupyter
+			python -m ipykernel install --user
+			pip install pandas
+			# pip install xlrd
+			pip install matplotlib
+			pip install seaborn
+			pip freeze > requirements.txt
+			mkdir notebooks
+			mkdir data
+			cd notebooks
+			curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/README.md
+			cd ..
+			jupyter-notebook
+		else
+			echo "Could not identify, what kind of project to scaffold."
+			echo "Options are: api or jupyter."
+		fi
+
+	else
+		echo "No further scaffolding."
+	fi
+
+	echo "Project creation complete. Happy coding!"
 
 	echo "- Project dir is $DEVHOME$mydir"
 	echo "- Running $pythonversion"
