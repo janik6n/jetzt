@@ -39,7 +39,7 @@ else
 			pip freeze > requirements.txt
 		elif [[ "$project_type" == "jupyter" ]]
 		then
-			echo "Installing requirements for a Jupyter project..."
+			echo "Installing requirements for a jupyter project..."
 			pip install jupyter
 			python -m ipykernel install --user
 			pip install pandas
@@ -50,12 +50,13 @@ else
 			mkdir notebooks
 			mkdir data
 			cd notebooks
+			# download a jupyter notebook template from this same project
 			curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
 			cd ..
 			jupyter-notebook
 		else
 			echo "Could not identify, what kind of project to scaffold."
-			echo "Options are: api or jupyter."
+			echo "Options are: flask or jupyter."
 		fi
 
 	else
