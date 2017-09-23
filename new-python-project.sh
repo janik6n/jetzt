@@ -50,7 +50,7 @@ else
 			mkdir notebooks
 			mkdir data
 			cd notebooks
-			curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/README.md
+			curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
 			cd ..
 			jupyter-notebook
 		else
