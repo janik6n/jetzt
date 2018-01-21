@@ -42,7 +42,7 @@ Depending on your shell, do the following.
 
 ## Scaffolding options
 
-When asked, whether to scaffold further, by answering `y` the tool installs a baseline for new project. Available ptions are explained below.
+When asked, whether to scaffold further, by answering `y` the tool installs a baseline for new project. Available options are explained below.
 
 ### Python
 
@@ -74,7 +74,7 @@ Create directories for:
 
 Download the following Jupyter notebook to `notebooks`:
 
-- https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
+- https://github.com/JaniKarh/scaffold-project/blob/master/seeds/starting-point.ipynb
 
 ... and finally runs the notebook server.
 
