@@ -2,7 +2,7 @@
 
 Light-weight scaffold raiser for new Python development projects.
 
-This is a tiny tool built with Bash Shell and Python 3 to automate repetitive manual tasks, when creating a new Python development project. What you will end up with, when using the tool?
+This is a tiny tool built with shell scripts and Python 3 to automate repetitive manual tasks, when creating a new Python development project. What you will end up with, when using the tool?
 
 1. A new project directory under your `DEVHOME`.
 1. New **active** *virtualenv* named `venv` with the System-level installed Python 3 version.
@@ -16,7 +16,7 @@ This has been tested on the following setup:
 1. MacOS Sierra 10.12.6
 1. Python 3.6.4 (installed via *Homebrew*)
 
-Things should probably work nicely on earlier releases of macOS / OS X and on Linux too. Python 3 is expected.
+Things should probably work nicely on earlier releases of macOS / OS X and on various Linux distros too. Python 3 is expected.
 
 ## Usage
 
