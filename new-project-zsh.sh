@@ -1,7 +1,11 @@
-#!/bin/bash -e
+#!/usr/local/bin/zsh
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
-read -p 'Name your new project: ' project_name
+vared -p 'Name your new project: ' -c project_name
+
+echo "DEVHOME: $DEVHOME"
+echo "Project name: $project_name"
+
 mydir=$(python3 $DEVHOME/scaffold-project/python-project-setup.py $DEVHOME "$project_name" 2>&1)
 
 if [[ "$mydir" == "already_exists" ]]
@@ -11,14 +15,12 @@ elif [[ "$mydir" == "invalid_name" ]]
 then
 	echo "Invalid name (empty), please craft another."
 else
-	# echo "creating project at $mydir ..."
+	# echo "mydir ok: $mydir"
 	mydir=$(echo $mydir | tr -d '\r')
 	echo "Created new project directory: $DEVHOME$mydir"
 	cd "$DEVHOME$mydir"
-	# pwd
-	. 'venv/bin/activate'
+	source 'venv/bin/activate'
 	echo "Virtualenv activated."
-	# pip list -o --format=columns
 	pip install -U setuptools
 	pip install -U pip
 	pip freeze > requirements.txt
@@ -27,11 +29,11 @@ else
 	echo ""
 	echo "Base project creation complete."
 
-	read -p "Would you like to scaffold a specific project (y/n)? " additional_stuff
+	vared -p "Would you like to scaffold a specific project (y/n)? " -c additional_stuff
 	if [[ "$additional_stuff" == "y" || "$additional_stuff" == "Y" ]]
 	then
 		echo "Scaffolding further..."
-		read -p "What kind of project would yo like to do (flask, jupyter)? " project_type
+		vared -p "What kind of project would yo like to do (flask / jupyter)? " -c project_type
 		if [[ "$project_type" == "flask" ]]
 		then
 			echo "Installing requirements for a Flask project..."
@@ -56,9 +58,10 @@ else
 			jupyter-notebook
 		else
 			echo "Could not identify, what kind of project to scaffold."
-			echo "Options are: flask or jupyter."
+			echo "Currently available options are:"
+			echo "  - flask"
+			echo "  - jupyter"
 		fi
-
 	else
 		echo "No further scaffolding."
 	fi
@@ -68,3 +71,10 @@ else
 	echo "- Project dir is $DEVHOME$mydir"
 	echo "- Running $pythonversion"
 fi
+
+# Unset variables (otherwise remembers them on the same terminal session in future runs!)
+unset project_name
+unset mydir
+unset pythonversion
+unset project_type
+unset additional_stuff
