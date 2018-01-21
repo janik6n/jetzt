@@ -27,7 +27,7 @@ Depending on your shell, do the following.
 1. Add new *environment variable* `DEVHOME` to your `.bash_profile`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
 1. Clone this repo to your local development machine, under `DEVHOME`.
-1. Optional: Create a shortcut for the Bash Shell Script to your `.bash_profile`.
+1. Optional: Create a shortcut for the shell script to your `.bash_profile`.
     - e.g. `alias npp='. /Users/me/Projects/scaffold-project/new-project-bash.sh'`
 1. Run the script with `npp` (should you have selected this as an alias) and follow the prompt.
 
@@ -36,22 +36,47 @@ Depending on your shell, do the following.
 1. Add new *environment variable* `DEVHOME` to your `.zshrc`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
 1. Clone this repo to your local development machine, under `DEVHOME`.
-1. Optional: Create a shortcut for the Bash Shell Script to your `.zshrc`.
+1. Optional: Create a shortcut for the shell script to your `.zshrc`.
     - e.g. `alias npp='source /Users/me/Projects/scaffold-project/new-project-zsh.sh'`
 1. Run the script with `npp` (should you have selected this as an alias) and follow the prompt.
 
 ## Scaffolding options
 
+When asked, whether to scaffold further, by answering `y` the tool installs a baseline for new project. Available ptions are explained below.
+
 ### Python
 
 Currently only Python 3 is supported.
 
-#### Install a baseline for new project
+#### Flask
 
-Currently available options are:
+Option `flask`.
 
-1. Flask
-1. Jupyter
+Pip install the following packages (latest available versions):
+
+- Flask
+
+#### Jupyter
+
+Option `jupyter`.
+
+Pip install the following packages (latest available versions):
+
+- jupyter + ipykernel
+- pandas
+- matplotlib
+- seaborn
+
+Create directories for:
+
+- notebooks
+- data
+
+Download the following Jupyter notebook to `notebooks`:
+
+- https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
+
+... and finally runs the notebook server.
 
 ## Contribution
 
