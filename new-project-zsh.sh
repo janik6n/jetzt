@@ -13,7 +13,7 @@ then
 	echo "Project path already exists. Let's not destroy that one."
 elif [[ "$mydir" == "invalid_name" ]]
 then
-	echo "Invalid name (empty), please craft another."
+	echo "Invalid name (empty), please craft some fancy name."
 else
 	# echo "mydir ok: $mydir"
 	mydir=$(echo $mydir | tr -d '\r')
