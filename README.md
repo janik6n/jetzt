@@ -17,23 +17,11 @@ This has been tested on the following setup:
 
 1. MacOS Sierra 10.12.6
 1. Python 3.6+ (installed via *Homebrew*)
+1. Zsh shell (oh-my-zsh)
 
 Things should probably work nicely on earlier releases of macOS / OS X and on various Linux distros too. Python 3 is expected.
 
 ## Usage
-
-Depending on your shell, do the following.
-
-### Bash
-
-1. Add new *environment variable* `DEVHOME` to your `.bash_profile`.
-    - e.g. `export DEVHOME='/Users/me/Projects/'`
-1. Clone this repo to your local development machine, under `DEVHOME`.
-1. Optional: Create a shortcut for the shell script to your `.bash_profile`.
-    - e.g. `alias npp='. /Users/me/Projects/scaffold-project/new-project-bash.sh'`
-1. Run the script with `npp` (should you have selected this as an alias) and follow the prompt.
-
-### Zsh
 
 1. Add new *environment variable* `DEVHOME` to your `.zshrc`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
@@ -48,7 +36,7 @@ When asked, whether to scaffold further, by answering `y` the tool installs a ba
 
 ### Python
 
-Currently only Python 3 is supported.
+The following Python project can be scaffolded at this time.
 
 #### Flask
 
@@ -86,9 +74,16 @@ Option `slspython`.
 
 Scaffold a Serverless project with Python 3.6 runtime in AWS.
 
+**Prerequisites with additions:**
+1. Python 3.6+
+1. Node.js v8+
+1. Docker
+
 Pip install the following packages (latest available versions):
 
 - flake8
+
+For more info, read [the docs](seeds/serverless-python/README.md).
 
 ## Contribution
 

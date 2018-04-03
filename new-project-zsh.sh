@@ -1,7 +1,7 @@
 #!/usr/local/bin/zsh
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
-echo "Running version 0.2.0"
+echo "Running version 0.2.1"
 vared -p 'Name your new project: ' -c project_name
 
 echo "DEVHOME: $DEVHOME"
@@ -43,7 +43,7 @@ else
 		elif [[ "$project_type" == "jupyter" ]]
 		then
 			echo "Installing requirements for a jupyter project..."
-			pip install -r $DEVHOME/scaffold-project/seeds/python/requirements-jupyter.txt
+			pip install -r $DEVHOME/scaffold-project/seeds/jupyter/requirements-jupyter.txt
 			python -m ipykernel install --user
 			pip freeze > requirements.txt
 			echo "Creating project directories..."
