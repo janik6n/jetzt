@@ -1,6 +1,7 @@
 #!/usr/local/bin/zsh
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
+echo "Running version 0.2.0"
 vared -p 'Name your new project: ' -c project_name
 
 echo "DEVHOME: $DEVHOME"
@@ -33,34 +34,49 @@ else
 	if [[ "$additional_stuff" == "y" || "$additional_stuff" == "Y" ]]
 	then
 		echo "Scaffolding further..."
-		vared -p "What kind of project would yo like to do (flask / jupyter)? " -c project_type
+		vared -p "What kind of project would yo like to do (flask / jupyter / slspython)? " -c project_type
 		if [[ "$project_type" == "flask" ]]
 		then
 			echo "Installing requirements for a Flask project..."
-			pip install Flask
+			pip install -r $DEVHOME/scaffold-project/seeds/python/requirements-flaskapp.txt
 			pip freeze > requirements.txt
 		elif [[ "$project_type" == "jupyter" ]]
 		then
 			echo "Installing requirements for a jupyter project..."
-			pip install jupyter
+			pip install -r $DEVHOME/scaffold-project/seeds/python/requirements-jupyter.txt
 			python -m ipykernel install --user
-			pip install pandas
-			# pip install xlrd
-			pip install matplotlib
-			pip install seaborn
 			pip freeze > requirements.txt
+			echo "Creating project directories..."
 			mkdir notebooks
-			mkdir data
 			cd notebooks
+			mkdir data
+			echo "Copying seed files to project..."
 			# download a jupyter notebook template from this same project
-			curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
+			# curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
+			cp $DEVHOME/scaffold-project/seeds/jupyter/starting-point.ipynb $DEVHOME$mydir/notebooks
 			cd ..
 			jupyter-notebook
+		elif [[ "$project_type" == "slspython" ]]
+		then
+			echo "Installing requirements for a Serverless Python project..."
+			pip install -r $DEVHOME/scaffold-project/seeds/serverless-python/requirements.txt
+			pip freeze > requirements.txt
+			echo "Installing development dependencies..."
+			pip install -r $DEVHOME/scaffold-project/seeds/serverless-python/requirements-dev.txt
+			pip freeze > requirements-dev.txt
+			echo "Copying seed files to project..."
+			cp $DEVHOME/scaffold-project/seeds/serverless-python/handler.py $DEVHOME$mydir
+			cp $DEVHOME/scaffold-project/seeds/serverless-python/serverless.yml $DEVHOME$mydir
+			cp $DEVHOME/scaffold-project/seeds/serverless-python/README.md $DEVHOME$mydir
+			echo "Initialize Node.js project..."
+			npm init --yes
+			npm install serverless-python-requirements
 		else
 			echo "Could not identify, what kind of project to scaffold."
 			echo "Currently available options are:"
 			echo "  - flask"
 			echo "  - jupyter"
+			echo "  - slspython"
 		fi
 	else
 		echo "No further scaffolding."

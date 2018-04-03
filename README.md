@@ -1,5 +1,7 @@
 # scaffold-project
 
+*The docs below are for version 0.2.0*
+
 Light-weight scaffold raiser for new Python development projects.
 
 This is a tiny tool built with shell scripts and Python 3 to automate repetitive manual tasks, when creating a new Python development project. What you will end up with, when using the tool?
@@ -14,7 +16,7 @@ This is a tiny tool built with shell scripts and Python 3 to automate repetitive
 This has been tested on the following setup:
 
 1. MacOS Sierra 10.12.6
-1. Python 3.6.4 (installed via *Homebrew*)
+1. Python 3.6+ (installed via *Homebrew*)
 
 Things should probably work nicely on earlier releases of macOS / OS X and on various Linux distros too. Python 3 is expected.
 
@@ -72,11 +74,21 @@ Create directories for:
 - notebooks
 - data
 
-Download the following Jupyter notebook to `notebooks`:
+Copy the following Jupyter notebook to `notebooks`:
 
 - https://github.com/JaniKarh/scaffold-project/blob/master/seeds/starting-point.ipynb
 
 ... and finally runs the notebook server.
+
+#### Serverless Python
+
+Option `slspython`.
+
+Scaffold a Serverless project with Python 3.6 runtime in AWS.
+
+Pip install the following packages (latest available versions):
+
+- flake8
 
 ## Contribution
 
