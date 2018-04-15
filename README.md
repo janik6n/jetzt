@@ -1,6 +1,6 @@
 # scaffold-project
 
-*The docs below are for version 0.3.0*
+*The docs below are for version 0.3.1*
 
 Light-weight scaffold raiser for new Python development projects.
 
@@ -80,7 +80,7 @@ Option `pythonsls`.
 
 Scaffold a Serverless project with Python 3.6 runtime in AWS.
 
-For more info, read [the docs](seeds/serverless-python/README.md).
+For more info, read [the docs](seeds/python-serverless/README.md).
 
 ## Install Python packages
 
