@@ -1,6 +1,6 @@
 # scaffold-project
 
-*The docs below are for version 0.2.0*
+*The docs below are for version 0.3.0*
 
 Light-weight scaffold raiser for new Python development projects.
 
@@ -25,14 +25,20 @@ Things should probably work nicely on earlier releases of macOS / OS X and on va
 
 1. Add new *environment variable* `DEVHOME` to your `.zshrc`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
-1. Clone this repo to your local development machine, under `DEVHOME`.
-1. Optional: Create a shortcut for the shell script to your `.zshrc`.
-    - e.g. `alias npp='source /Users/me/Projects/scaffold-project/new-project-zsh.sh'`
-1. Run the script with `npp` (should you have selected this as an alias) and follow the prompt.
+2. Clone this repo to your local development machine, under `DEVHOME`.
+3. Optional (yet recommended): Create shortcuts to the shell scripts in your `.zshrc`.
+    - `alias np='source /Users/me/Projects/scaffold-project/new-project-zsh.sh'`
+    - `alias spip='source /Users/me/Projects/scaffold-project/spip.sh'`
+4. Source your `.zshrc` with `source .zshrc`.
+5. Run the script with `np` (should you have selected this as an alias) and follow the prompt.
 
 ## Scaffolding options
 
 When asked, whether to scaffold further, by answering `y` the tool installs a baseline for new project. Available options are explained below.
+
+- [Python - Flask](#flask)
+- [Python - Jupyter](#jupyter)
+- [Python - Serverless](#python-serverless)
 
 ### Python
 
@@ -68,22 +74,47 @@ Copy the following Jupyter notebook to `notebooks`:
 
 ... and finally runs the notebook server.
 
-#### Serverless Python
+#### Python Serverless
 
-Option `slspython`.
+Option `pythonsls`.
 
 Scaffold a Serverless project with Python 3.6 runtime in AWS.
 
-**Prerequisites with additions:**
-1. Python 3.6+
-1. Node.js v8+
-1. Docker
-
-Pip install the following packages (latest available versions):
-
-- flake8
-
 For more info, read [the docs](seeds/serverless-python/README.md).
+
+## Install Python packages
+
+There is of course the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`.
+
+This toolset includes a shell script called `spip.sh`, which is a wrapper around *pip*. This is a little helper, which will manage your installed packages for you. Please read the following examples:
+
+### Install a package with spip
+
+The regular use case is to install a dependency, which is required in production environment too.
+
+To install a package `requests`, run `spip install requests`. What does this do?
+
+1. Install the package *requests*.
+2. Add the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added.
+
+Example of `requirements.txt`:
+
+```
+requests>=2.18.4
+```
+
+### Install a development package with spip
+
+To install a development dependency `flake8`, which is **not** needed in production environment, run `spip install flake8 --dev`. What does this do?
+
+1. Install the package *flake8*.
+2. Add the package `flake8` to `requirements-dev.txt` with a version requirement set to minimum of the currently installed version. The packages, which *flake8* depends on, are *not* added.
+
+Example of `requirements-dev.txt`:
+
+```
+flake8>=3.5.0
+```
 
 ## Contribution
 

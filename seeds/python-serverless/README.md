@@ -18,9 +18,8 @@ After scaffolding, do the following.
 
 Time to edit `handler.py`. For example:
 
-1. Change function `hello` to `main`.
-2. Import requests
-3. Use requests
+1. Import requests
+2. Use requests
 
 ```
 r = requests.get('https://koodimaa.com')
@@ -30,16 +29,13 @@ print(response)
 
 ## Install new requirements
 
-Install requests with:
-`pip install requests`
-
-Freeze requirements:
-`pip freeze >requirements.txt`
+Install requests with spip:
+`spip install requests`
 
 ## Test the app locally
 
 Run:
-´python handler.py``
+`python handler.py`
 
 ... which should return response as expected.
 
@@ -92,9 +88,6 @@ In the project directory, run:
 
 For example, install `flake8` (already installed):
 
-`pip install flake8`
+`spip install flake8 --dev`
 
-Store the dev dependencies to own requirements file:
-`pip freeze >requirements-dev.txt`
-
-... this way the dev dependencies won't be installed to Lambda, as they are not needed there.
+The development dependencies are added to their own requirements file `requirements-dev.txt`. This way the dev dependencies won't be installed to Lambda, as they are not needed there.
