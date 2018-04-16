@@ -30,7 +30,7 @@ Things should probably work nicely on earlier releases of macOS / OS X and on va
     - `alias jetzt='source /Users/me/Projects/scaffold-project/jetzt.sh'`
     - `alias spip='source /Users/me/Projects/scaffold-project/spip.sh'`
 4. Source your `.zshrc` with `source .zshrc`.
-5. Run the script with `np` (should you have selected this as an alias) and follow the prompt.
+5. Run the script with `jetzt` and follow the prompt.
 
 ## Scaffolding options
 
