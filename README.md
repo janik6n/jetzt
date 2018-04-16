@@ -1,4 +1,4 @@
-# scaffold-project
+# jetzt
 
 *The docs below are for version 0.3.1*
 
@@ -26,8 +26,8 @@ Things should probably work nicely on earlier releases of macOS / OS X and on va
 1. Add new *environment variable* `DEVHOME` to your `.zshrc`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
 2. Clone this repo to your local development machine, under `DEVHOME`.
-3. Optional (yet recommended): Create shortcuts to the shell scripts in your `.zshrc`.
-    - `alias np='source /Users/me/Projects/scaffold-project/new-project-zsh.sh'`
+3. Create shortcuts to the shell scripts in your `.zshrc`.
+    - `alias jetzt='source /Users/me/Projects/scaffold-project/jetzt.sh'`
     - `alias spip='source /Users/me/Projects/scaffold-project/spip.sh'`
 4. Source your `.zshrc` with `source .zshrc`.
 5. Run the script with `np` (should you have selected this as an alias) and follow the prompt.
