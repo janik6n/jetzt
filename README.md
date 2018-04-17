@@ -1,15 +1,18 @@
 # jetzt
 
-*The docs below are for version 0.3.1*
+*The docs below are for version 0.4.0*
 
 Light-weight scaffold raiser for new Python development projects.
 
-This is a tiny tool built with shell scripts and Python 3 to automate repetitive manual tasks, when creating a new Python development project. What you will end up with, when using the tool?
+This is a tiny tool built with shell scripts and Python 3.6+ to automate repetitive manual tasks, when creating a new Python development project. What you will end up with, when using the tool?
 
-1. A new project directory under your `DEVHOME`.
-1. New **active** *virtualenv* named `venv` with the System-level installed Python 3 version.
+1. A new project directory under your *current directory*.
+1. New **active** *virtualenv* named `venv` with the System-level installed Python 3.6+ version.
 1. The virtualenv will have `pip` and `setuptools` installed and updated to latest available versions.
 1. A standard `requirements.txt` will also be created.
+
+- [Create project](#create-project)
+- [Install Python packages](#install-python-packages)
 
 ## Prerequisites
 
@@ -17,11 +20,15 @@ This has been tested on the following setup:
 
 1. MacOS Sierra 10.12.6
 1. Python 3.6+ (installed via *Homebrew*)
-1. Zsh shell (oh-my-zsh)
+1. Zsh shell (with oh-my-zsh)
 
-Things should probably work nicely on earlier releases of macOS / OS X and on various Linux distros too. Python 3 is expected.
+Things should probably work nicely on earlier (and even later) releases of macOS / OS X and on various Linux distros too. **Python 3.6+ is expected.**
 
-## Usage
+## Create project
+
+Create a new project.
+
+### How to use?
 
 1. Add new *environment variable* `DEVHOME` to your `.zshrc`.
     - e.g. `export DEVHOME='/Users/me/Projects/'`
@@ -32,31 +39,31 @@ Things should probably work nicely on earlier releases of macOS / OS X and on va
 4. Source your `.zshrc` with `source .zshrc`.
 5. Run the script with `jetzt` and follow the prompt.
 
-## Scaffolding options
+### Scaffolding options
 
-When asked, whether to scaffold further, by answering `y` the tool installs a baseline for new project. Available options are explained below.
+When asked, whether to scaffold further, by answering `y` the tool installs a baseline for a new project. Available options are explained below.
 
 - [Python - Flask](#flask)
 - [Python - Jupyter](#jupyter)
 - [Python - Serverless](#python-serverless)
 
-### Python
+#### Python
 
-The following Python project can be scaffolded at this time.
+The following Python projects can be scaffolded at this time.
 
-#### Flask
+##### Flask
 
 Option `flask`.
 
-Pip install the following packages (latest available versions):
+Installs the following packages (latest available versions):
 
 - Flask
 
-#### Jupyter
+##### Jupyter
 
 Option `jupyter`.
 
-Pip install the following packages (latest available versions):
+Installs the following packages (latest available versions):
 
 - jupyter + ipykernel
 - pandas
@@ -66,15 +73,15 @@ Pip install the following packages (latest available versions):
 Create directories for:
 
 - notebooks
-- data
+- notebooks/data
 
 Copy the following Jupyter notebook to `notebooks`:
 
-- https://github.com/JaniKarh/scaffold-project/blob/master/seeds/starting-point.ipynb
+- https://github.com/janikarh/jetzt/blob/master/seeds/starting-point.ipynb
 
 ... and finally runs the notebook server.
 
-#### Python Serverless
+##### Python Serverless
 
 Option `pythonsls`.
 
@@ -84,9 +91,9 @@ For more info, read [the docs](seeds/python-serverless/README.md).
 
 ## Install Python packages
 
-There is of course the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`.
+There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
 
-This toolset includes a shell script called `spip.sh`, which is a wrapper around *pip*. This is a little helper, which will manage your installed packages for you. Please read the following examples:
+*Jetzt* includes a shell script called `spip.sh`, which is a wrapper around *pip*. This is a little helper, which will manage your installed packages for you. Please read the following examples:
 
 ### Install a package with spip
 
@@ -94,7 +101,7 @@ The regular use case is to install a dependency, which is required in production
 
 To install a package `requests`, run `spip install requests`. What does this do?
 
-1. Install the package *requests*.
+1. Install the package *requests* (latest available version).
 2. Add the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added.
 
 Example of `requirements.txt`:
@@ -105,9 +112,9 @@ requests>=2.18.4
 
 ### Install a development package with spip
 
-To install a development dependency `flake8`, which is **not** needed in production environment, run `spip install flake8 --dev`. What does this do?
+To install a development package `flake8`, which is **not** needed in production environment, run `spip install flake8 --dev`. What does this do?
 
-1. Install the package *flake8*.
+1. Install the package *flake8* (latest available version).
 2. Add the package `flake8` to `requirements-dev.txt` with a version requirement set to minimum of the currently installed version. The packages, which *flake8* depends on, are *not* added.
 
 Example of `requirements-dev.txt`:

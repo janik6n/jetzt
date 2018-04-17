@@ -13,7 +13,7 @@ Docs:
 import argparse
 import os
 import sys
-import venv
+# import venv
 
 
 def main(args):
@@ -42,7 +42,7 @@ def main(args):
         # work_dir = os.getcwd()
 
         ''' Create virtualenv in project dir, install Pip but do not install System Packages. '''
-        venv.create('venv', system_site_packages=False, with_pip=True)
+        # venv.create('venv', system_site_packages=False, with_pip=True)
 
     sys.exit(project)
 

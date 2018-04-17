@@ -1,13 +1,13 @@
 #!/usr/local/bin/zsh
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
-echo "Running version 0.3.0"
+echo "Running version 0.4.0"
 vared -p 'Name your new project: ' -c project_name
 
-echo "DEVHOME: $DEVHOME"
-echo "Project name: $project_name"
+# echo "DEVHOME: $(pwd)"
+# echo "Project name: $project_name"
 
-mydir=$(python3 $DEVHOME/scaffold-project/python-project-setup.py $DEVHOME "$project_name" 2>&1)
+mydir=$(python3 $DEVHOME/jetzt/python-project-setup.py $(pwd) "$project_name" 2>&1)
 
 if [[ "$mydir" == "already_exists" ]]
 then
@@ -16,15 +16,14 @@ elif [[ "$mydir" == "invalid_name" ]]
 then
 	echo "Invalid name (empty), please craft some fancy name."
 else
-	# echo "mydir ok: $mydir"
 	mydir=$(echo $mydir | tr -d '\r')
-	echo "Created new project directory: $DEVHOME$mydir"
-	cd "$DEVHOME$mydir"
+	echo "Created new project directory: $(pwd)/$mydir"
+	cd "$(pwd)/$mydir"
+	python3 -m venv venv
 	source 'venv/bin/activate'
 	echo "Virtualenv activated."
 	pip install -U pip
 	pip install -U setuptools
-	# pip freeze > requirements.txt
 	echo "Pip & setuptools upgraded to latest."
 	pythonversion=$(python -V)
 	echo ""
@@ -38,12 +37,12 @@ else
 		if [[ "$project_type" == "flask" ]]
 		then
 			echo "Installing requirements for a Flask project..."
-			pip install -r $DEVHOME/scaffold-project/seeds/python/requirements-flaskapp.txt
+			pip install -r $DEVHOME/jetzt/seeds/python/requirements-flaskapp.txt
 			pip freeze > requirements.txt
 		elif [[ "$project_type" == "jupyter" ]]
 		then
 			echo "Installing requirements for a jupyter project..."
-			pip install -r $DEVHOME/scaffold-project/seeds/jupyter/requirements-jupyter.txt
+			pip install -r $DEVHOME/jetzt/seeds/jupyter/requirements-jupyter.txt
 			python -m ipykernel install --user
 			pip freeze > requirements.txt
 			echo "Creating project directories..."
@@ -51,9 +50,7 @@ else
 			cd notebooks
 			mkdir data
 			echo "Copying seed files to project..."
-			# download a jupyter notebook template from this same project
-			# curl -O https://raw.githubusercontent.com/JaniKarh/scaffold-project/master/seeds/starting-point.ipynb
-			cp $DEVHOME/scaffold-project/seeds/jupyter/starting-point.ipynb $DEVHOME$mydir/notebooks
+			cp $DEVHOME/jetzt/seeds/jupyter/starting-point.ipynb $(pwd)/
 			cd ..
 			jupyter-notebook
 		elif [[ "$project_type" == "pythonsls" ]]
@@ -62,9 +59,9 @@ else
 			echo "Installing development dependencies..."
 			spip install flake8 --dev
 			echo "Copying seed files to project..."
-			cp $DEVHOME/scaffold-project/seeds/python-serverless/handler.py $DEVHOME$mydir
-			cp $DEVHOME/scaffold-project/seeds/python-serverless/serverless.yml $DEVHOME$mydir
-			cp $DEVHOME/scaffold-project/seeds/python-serverless/README.md $DEVHOME$mydir
+			cp $DEVHOME/jetzt/seeds/python-serverless/handler.py $(pwd)/
+			cp $DEVHOME/jetzt/seeds/python-serverless/serverless.yml $(pwd)/
+			cp $DEVHOME/jetzt/seeds/python-serverless/README.md $(pwd)/
 			echo "Initialize Node.js project..."
 			npm init --yes
 			npm install serverless-python-requirements
@@ -81,7 +78,7 @@ else
 
 	echo "Project creation complete. Happy coding!"
 
-	echo "- Project dir is $DEVHOME$mydir"
+	echo "- Project dir is $(pwd)/$mydir"
 	echo "- Running $pythonversion"
 fi
 
