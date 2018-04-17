@@ -1,6 +1,6 @@
 # jetzt
 
-*The docs below are for version 0.4.0*
+*The docs below are for version 0.4.1*
 
 Light-weight scaffold raiser for new Python development projects.
 
@@ -11,9 +11,6 @@ This is a tiny tool built with shell scripts and Python 3.6+ to automate repetit
 1. The virtualenv will have `pip` and `setuptools` installed and updated to latest available versions.
 1. A standard `requirements.txt` will also be created.
 
-- [Create project](#create-project)
-- [Install Python packages](#install-python-packages)
-
 ## Prerequisites
 
 This has been tested on the following setup:
@@ -23,6 +20,9 @@ This has been tested on the following setup:
 1. Zsh shell (with oh-my-zsh)
 
 Things should probably work nicely on earlier (and even later) releases of macOS / OS X and on various Linux distros too. **Python 3.6+ is expected.**
+
+- [Create project](#create-project)
+- [Install Python packages](#install-python-packages)
 
 ## Create project
 
@@ -70,12 +70,12 @@ Installs the following packages (latest available versions):
 - matplotlib
 - seaborn
 
-Create directories for:
+Creates directories for:
 
 - notebooks
 - notebooks/data
 
-Copy the following Jupyter notebook to `notebooks`:
+Copies the following Jupyter notebook to `notebooks`:
 
 - https://github.com/janikarh/jetzt/blob/master/seeds/starting-point.ipynb
 
@@ -85,9 +85,7 @@ Copy the following Jupyter notebook to `notebooks`:
 
 Option `pythonsls`.
 
-Scaffold a Serverless project with Python 3.6 runtime in AWS.
-
-For more info, read [the docs](seeds/python-serverless/README.md).
+Scaffolds a Serverless project with Python 3.6 runtime in AWS. For more info, read [the docs](seeds/python-serverless/README.md).
 
 ## Install Python packages
 
@@ -97,12 +95,12 @@ There is naturally the standard way of using *pip* to install dependencies, and 
 
 ### Install a package with spip
 
-The regular use case is to install a dependency, which is required in production environment too.
+The regular use case is to install a package, which is required in production environment too.
 
 To install a package `requests`, run `spip install requests`. What does this do?
 
-1. Install the package *requests* (latest available version).
-2. Add the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added.
+1. Installs the package *requests* (latest available version).
+2. Adds the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added.
 
 Example of `requirements.txt`:
 
@@ -114,8 +112,8 @@ requests>=2.18.4
 
 To install a development package `flake8`, which is **not** needed in production environment, run `spip install flake8 --dev`. What does this do?
 
-1. Install the package *flake8* (latest available version).
-2. Add the package `flake8` to `requirements-dev.txt` with a version requirement set to minimum of the currently installed version. The packages, which *flake8* depends on, are *not* added.
+1. Installs the package *flake8* (latest available version).
+2. Adds the package `flake8` to `requirements-dev.txt` with a version requirement set to minimum of the currently installed version. The packages, which *flake8* depends on, are *not* added.
 
 Example of `requirements-dev.txt`:
 
