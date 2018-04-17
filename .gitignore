@@ -72,6 +72,8 @@ projectFilesBackup
 *.sublime-project
 *.sublime-workspace
 
+.vscode/
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
