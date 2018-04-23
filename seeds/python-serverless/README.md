@@ -91,3 +91,15 @@ For example, install `flake8` (already installed):
 `spip install flake8 --dev`
 
 The development dependencies are added to their own requirements file `requirements-dev.txt`. This way the dev dependencies won't be installed to Lambda, as they are not needed there.
+
+## Maintenance
+
+Check for updates to this tool from time to time.
+
+Also pull the latest Docker build image  with
+`docker pull lambci/lambda:build-python3.6`
+
+## Miscellaneous
+
+[The Serverless Python Requirements plugin](https://www.npmjs.com/package/serverless-python-requirements)
+

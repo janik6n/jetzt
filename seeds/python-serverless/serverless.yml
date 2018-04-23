@@ -17,6 +17,9 @@ service: myTestService
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+# By defining a role, a predefined IAM role can be used.
+# A role can be defined on function level too.
+
 provider:
   name: aws
   runtime: python3.6
@@ -25,16 +28,32 @@ provider:
   stackTags:
     Project : myTestServiceTag
     Tag2 : someOtherTag
+  role: arn:aws:iam:...which-will-be-used-to-run-the-functions
 
 package:
   exclude:
     - README.md
     - requirements-dev.txt
-    - .vscode
+    - .vscode/**
+    - __pycache__/**
+    - node_modules/**
+    - venv/**
+    - .DS_Store
+
+# Use events under function definition to schedule the execution.
+# Remove if not needed.
 
 functions:
   testFunction:
+    description: Description of the Lambda Function.
+    runtime: python3.6
+    memorySize: 128
+    timeout: 60
     handler: handler.main
+    environment:
+      environment_variable: value-of-the-env_var
+    events:
+      - schedule: rate(10 minutes)
 
 plugins:
   - serverless-python-requirements
