@@ -1,7 +1,7 @@
 #!/usr/local/bin/zsh
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
-echo "Running version 0.4.1"
+echo "Running version 0.5.0"
 vared -p 'Name your new project: ' -c project_name
 
 # echo "DEVHOME: $(pwd)"

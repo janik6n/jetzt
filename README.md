@@ -2,7 +2,7 @@
 
 ![jetzt logo](web/jetzt-logo-400x400.png "Jetzt!")
 
-*The docs below are for version 0.4.1.*
+*The docs below are for version 0.5.0.*
 
 Light-weight scaffold raiser for new Python development projects.
 
