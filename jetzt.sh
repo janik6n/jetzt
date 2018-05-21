@@ -1,7 +1,7 @@
 #!/usr/local/bin/zsh
 
 echo "Hello! So happy you decided to scaffold a new project! Let's begin."
-echo "Running version 0.5.0"
+echo "Running version 0.6.0"
 vared -p 'Name your new project: ' -c project_name
 
 # echo "DEVHOME: $(pwd)"
@@ -57,7 +57,7 @@ else
 		then
 			echo "" > requirements.txt
 			echo "Installing development dependencies..."
-			spip install flake8 --dev
+			jep install flake8 --dev
 			echo "Copying seed files to project..."
 			cp $DEVHOME/jetzt/seeds/python-serverless/handler.py $(pwd)/
 			cp $DEVHOME/jetzt/seeds/python-serverless/serverless.yml $(pwd)/

@@ -29,8 +29,8 @@ print(response)
 
 ## Install new requirements
 
-Install requests with spip:
-`spip install requests`
+Install requests with jep:
+`jep install requests`
 
 ## Test the app locally
 
@@ -88,7 +88,7 @@ In the project directory, run:
 
 For example, install `flake8` (already installed):
 
-`spip install flake8 --dev`
+`jep install flake8 --dev`
 
 The development dependencies are added to their own requirements file `requirements-dev.txt`. This way the dev dependencies won't be installed to Lambda, as they are not needed there.
 

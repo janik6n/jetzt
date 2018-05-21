@@ -2,7 +2,7 @@
 
 ![jetzt logo](web/jetzt-logo-400x400.png "Jetzt!")
 
-*The docs below are for version 0.5.0.*
+*The docs below are for version 0.6.0.*
 
 Light-weight scaffold raiser for new Python development projects.
 
@@ -37,7 +37,7 @@ Create a new project.
 2. Clone this repo to your local development machine, under `DEVHOME`.
 3. Create shortcuts to the shell scripts in your `.zshrc`.
     - `alias jetzt='source /Users/me/Projects/scaffold-project/jetzt.sh'`
-    - `alias spip='source /Users/me/Projects/scaffold-project/spip.sh'`
+    - `alias jep='source /Users/me/Projects/scaffold-project/jep.sh'`
 4. Source your `.zshrc` with `source .zshrc`.
 5. Run the script with `jetzt` and follow the prompt.
 
@@ -93,13 +93,13 @@ Scaffolds a Serverless project with Python 3.6 runtime in AWS. For more info, re
 
 There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
 
-*Jetzt* includes a shell script called `spip.sh`, which is a wrapper around *pip*. This is a little helper, which will manage your installed packages for you. Please read the following examples:
+*Jetzt* includes a shell script called `jep.sh`, which is a wrapper around *pip*. This is a little helper, which will manage your installed packages for you. Please read the following examples:
 
-### Install a package with spip
+### Install a package with jep
 
 The regular use case is to install a package, which is required in production environment too.
 
-To install a package `requests`, run `spip install requests`. What does this do?
+To install a package `requests`, run `jep install requests`. What does this do?
 
 1. Installs the package *requests* (latest available version).
 2. Adds the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added.
@@ -110,9 +110,9 @@ Example of `requirements.txt`:
 requests>=2.18.4
 ```
 
-### Install a development package with spip
+### Install a development package with jep
 
-To install a development package `flake8`, which is **not** needed in production environment, run `spip install flake8 --dev`. What does this do?
+To install a development package `flake8`, which is **not** needed in production environment, run `jep install flake8 --dev`. What does this do?
 
 1. Installs the package *flake8* (latest available version).
 2. Adds the package `flake8` to `requirements-dev.txt` with a version requirement set to minimum of the currently installed version. The packages, which *flake8* depends on, are *not* added.

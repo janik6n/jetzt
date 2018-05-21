@@ -1,6 +1,6 @@
 #!/usr/local/bin/zsh
 
-# spip will wrap around pip and freeze to install
+# jep will wrap around pip and freeze to install
 # Python packages in a managed way.
 
 if [[ "$1" == "install" ]] then
