@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+include jetzt/bin/jetzt_scaffold.sh
+include jetzt/bin/install_pypi_pkg.sh
+include jetzt/bin/list_pkgs.sh
+graft jetzt/seeds

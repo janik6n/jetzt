@@ -1,108 +1,85 @@
-# jetzt
+# Jetzt
 
-![jetzt logo](web/jetzt-logo-400x400.png "Jetzt!")
+Light-weight project manager for Python projects.
 
-*The docs below are for version 0.6.0.*
+This is a tiny tool built to automate repetitive manual tasks, when creating a new Python development project and managing project dependencies. What you will end up with, when using *jetzt*?
 
-Light-weight scaffold raiser for new Python development projects.
-
-This is a tiny tool built with shell scripts and Python 3.6+ to automate repetitive manual tasks, when creating a new Python development project. What you will end up with, when using the tool?
-
-1. A new project directory under your *current directory*.
-1. New **active** *virtualenv* named `venv` with the System-level installed Python 3.6+ version.
+1. A new project directory under your *project base directory*, as defined in `JETZT_HOME`.
+1. A new *virtualenv* named `venv` under the project directory with the System-level installed Python 3.6+ version.
 1. The virtualenv will have `pip` and `setuptools` installed and updated to latest available versions.
-1. A standard `requirements.txt` will also be created.
+1. Additional packages will be installed based on project type.
 
 ## Prerequisites
 
 This has been tested on the following setup:
 
-1. MacOS Sierra 10.12.6
+1. MacOS Sierra 10.12.6 and newer
 1. Python 3.6+ (installed via *Homebrew*)
 1. Zsh shell (with oh-my-zsh)
 
-Things should probably work nicely on earlier (and even later) releases of macOS / OS X and on various Linux distros too. **Python 3.6+ is expected.**
+Things should probably work nicely on other releases of macOS and on various Linux distros too. **Python 3.6+ and zsh are expected.**
+
+[A changelog](https://github.com/janikarh/jetzt/blob/master/CHANGELOG.md) is maintained.
 
 - [Create project](#create-project)
 - [Install Python packages](#install-python-packages)
 
-## Create project
+## Create new project
 
-Create a new project.
-
-### How to use?
-
-1. Add new *environment variable* `DEVHOME` to your `.zshrc`.
-    - e.g. `export DEVHOME='/Users/me/Projects/'`
-2. Clone this repo to your local development machine, under `DEVHOME`.
-3. Create shortcuts to the shell scripts in your `.zshrc`.
-    - `alias jetzt='source /Users/me/Projects/scaffold-project/jetzt.sh'`
-    - `alias jep='source /Users/me/Projects/scaffold-project/jep.sh'`
-4. Source your `.zshrc` with `source .zshrc`.
-5. Run the script with `jetzt` and follow the prompt.
+Run `jetzt --scaffold` and follow the prompt. **Make sure**, you have set *environment variable* `JETZT_HOME` to point to a directory, which will hold the individual projects.
 
 ### Scaffolding options
 
-When asked, whether to scaffold further, by answering `y` the tool installs a baseline for a new project. Available options are explained below.
+You have couple of options for a new project.
 
-- [Python - Flask](#flask)
-- [Python - Jupyter](#jupyter)
-- [Python - Serverless](#python-serverless)
+Each project will have the following packages installed as *development dependencies*:
 
-#### Python
+- flake8
+- pytest
 
-The following Python projects can be scaffolded at this time.
+These will be listed in `requirements-dev.txt`.
 
-##### Flask
+#### Python - [Blank]
 
-Option `flask`.
+This scaffolding option is meant to be a good starting point for a generic Python project. This option will not install any additional packages.
 
-Installs the following packages (latest available versions):
+#### Python - Flask
+
+This scaffolding option is meant to be a good starting point for a new Flask-based webapp / API project. This option will install the following packages:
 
 - Flask
 
-##### Jupyter
+These will be listed in `requirements.txt`.
 
-Option `jupyter`.
+#### Python - Jupyter
 
-Installs the following packages (latest available versions):
+This scaffolding option is meant to be a good starting point for a new data science / analytics project. This option will install the following packages:
 
 - jupyter + ipykernel
 - pandas
 - matplotlib
 - seaborn
 
-Creates directories for:
+These will be listed in `requirements.txt`.
 
-- notebooks
-- notebooks/data
+Also a `data`-directory will be created, and [this notebook](https://github.com/janikarh/jetzt/blob/master/jetzt/seeds/python_jupyter/starting-point.ipynb) will be copied to the project root (the notebook is included in the installation package).
 
-Copies the following Jupyter notebook to `notebooks`:
+After scaffolding, start a jupyter server by running `jupyter-notebook` in the project root directory.
 
-- https://github.com/janikarh/jetzt/blob/master/seeds/starting-point.ipynb
-
-... and finally runs the notebook server.
-
-##### Python Serverless
-
-Option `pythonsls`.
-
-Scaffolds a Serverless project with Python 3.6 runtime in AWS. For more info, read [the docs](seeds/python-serverless/README.md).
-
-## Install Python packages
+## Manage Python packages
 
 There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
 
-*Jetzt* includes a shell script called `jep.sh`, which is a wrapper around *pip*. This is a little helper, which will manage your installed packages for you. Please read the following examples:
+*Jetzt* includes an option to install and manage packages for you. Please read the following examples:
 
-### Install a package with jep
+### Install a package
 
-The regular use case is to install a package, which is required in production environment too.
+To install a package `requests`, run `jetzt --install` and follow the prompt. You have an option to install the package as *a production dependency* or as *a development dependency*. What does all this mean, you might ask? Jetzt will:
 
-To install a package `requests`, run `jep install requests`. What does this do?
+1. Install the package *requests* (latest available version).
+2. Add the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added. If you selected `DEV` as a dependency type, the file `requirements-dev.txt` will be used instead.
 
-1. Installs the package *requests* (latest available version).
-2. Adds the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added.
+**At the moment, you can only install one package at a time.**
 
 Example of `requirements.txt`:
 
@@ -110,22 +87,10 @@ Example of `requirements.txt`:
 requests>=2.18.4
 ```
 
-### Install a development package with jep
+### List installed packages
 
-To install a development package `flake8`, which is **not** needed in production environment, run `jep install flake8 --dev`. What does this do?
+To list installed packages, run `jetzt --list`.
 
-1. Installs the package *flake8* (latest available version).
-2. Adds the package `flake8` to `requirements-dev.txt` with a version requirement set to minimum of the currently installed version. The packages, which *flake8* depends on, are *not* added.
-
-Example of `requirements-dev.txt`:
-
-```
-flake8>=3.5.0
-```
-
-## Contribution
-
-You want to contribute to this little project? Raise an issue first, let's discuss about your idea.
 
 ## License
 
