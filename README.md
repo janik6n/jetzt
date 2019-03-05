@@ -1,5 +1,11 @@
 # Jetzt
 
+[![version](https://img.shields.io/pypi/v/jetzt.svg?style=flat)](https://pypi.org/project/jetzt/)
+[![platform](https://img.shields.io/pypi/pyversions/jetzt.svg?style=flat)](https://pypi.org/project/jetzt/)
+[![wheel](https://img.shields.io/pypi/wheel/jetzt.svg?style=flat)](https://pypi.org/project/jetzt/)
+[![downloads](https://img.shields.io/pypi/dm/jetzt.svg?style=flat)](https://pypi.org/project/jetzt/)
+[![license](https://img.shields.io/github/license/janikarh/jetzt.svg?style=flat)](https://github.com/janikarh/jetzt/blob/master/LICENSE)
+
 Light-weight project manager for Python projects.
 
 This is a tiny tool built to automate repetitive manual tasks, when creating a new Python development project and managing project dependencies. What you will end up with, when using *jetzt*?
@@ -36,6 +42,7 @@ Each project will have the following packages installed as *development dependen
 
 - flake8
 - pytest
+- jetzt
 
 These will be listed in `requirements-dev.txt`.
 
