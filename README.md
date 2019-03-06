@@ -27,8 +27,8 @@ Things should probably work nicely on other releases of macOS and on various Lin
 
 [A changelog](https://github.com/janikarh/jetzt/blob/master/CHANGELOG.md) is maintained.
 
-- [Create project](#create-project)
-- [Install Python packages](#install-python-packages)
+- [Create project](#create-new-project)
+- [Install Python packages](#manage-python-packages)
 
 ## Create new project
 
