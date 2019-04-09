@@ -10,10 +10,11 @@ Light-weight project manager for Python projects.
 
 This is a tiny tool built to automate repetitive manual tasks, when creating a new Python development project and managing project dependencies. What you will end up with, when using *jetzt*?
 
-1. A new project directory under your *project base directory*, as defined in `JETZT_HOME`.
+1. A new **project directory** under your *current directory*.
 1. A new *virtualenv* named `venv` under the project directory with the System-level installed Python 3.6+ version.
 1. The virtualenv will have `pip` and `setuptools` installed and updated to latest available versions.
-1. Additional packages will be installed based on project type.
+1. Additional packages will be installed based on the selected project type.
+1. Depending on the project type, other resources may be created to initialize a new project.
 
 ## Prerequisites
 

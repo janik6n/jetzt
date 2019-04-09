@@ -43,10 +43,11 @@ then
     source "$4/bin/install_pypi_pkg.sh" pandas PROD
     source "$4/bin/install_pypi_pkg.sh" matplotlib PROD
     source "$4/bin/install_pypi_pkg.sh" seaborn PROD
+    # As of 9.4.2019 the fix is no longer needed.
     # Fix the current (as of 5.3.2019) issue with Tornado 6.x
     # https://github.com/jupyter/notebook/issues/2664
-    pip uninstall -y tornado
-    pip install tornado==5.1.1
+    # pip uninstall -y tornado
+    # pip install tornado==5.1.1
     # Fix end.
     python -m ipykernel install --user
     # pip freeze > requirements.txt
