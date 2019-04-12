@@ -22,27 +22,27 @@ pythonversion=$(python -V)
 if [[ "$3" == "Python - [Blank]" ]]
 then
     echo "${GREEN}Installing requirements for a blank Python project...${NC}"
-    source "$4/bin/install_pypi_pkg.sh" flake8 DEV
-    source "$4/bin/install_pypi_pkg.sh" pytest DEV
-    source "$4/bin/install_pypi_pkg.sh" jetzt DEV
+    source "$4/bin/install_pypi_pkg.sh" flake8 DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" pytest DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" jetzt DEV "$4"
     # echo "" > requirements.txt
 elif [[ "$3" == "Python - Flask" ]]
 then
     echo "${GREEN}Installing requirements for a Flask project...${NC}"
-    source "$4/bin/install_pypi_pkg.sh" flake8 DEV
-    source "$4/bin/install_pypi_pkg.sh" pytest DEV
-    source "$4/bin/install_pypi_pkg.sh" jetzt DEV
-    source "$4/bin/install_pypi_pkg.sh" flask PROD
+    source "$4/bin/install_pypi_pkg.sh" flake8 DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" pytest DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" jetzt DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" flask PROD "$4"
 elif [[ "$3" == "Python - Jupyter" ]]
 then
     echo "${GREEN}Installing requirements for a Jupyter project...${NC}"
-    source "$4/bin/install_pypi_pkg.sh" flake8 DEV
-    source "$4/bin/install_pypi_pkg.sh" pytest DEV
-    source "$4/bin/install_pypi_pkg.sh" jetzt DEV
-    source "$4/bin/install_pypi_pkg.sh" jupyter PROD
-    source "$4/bin/install_pypi_pkg.sh" pandas PROD
-    source "$4/bin/install_pypi_pkg.sh" matplotlib PROD
-    source "$4/bin/install_pypi_pkg.sh" seaborn PROD
+    source "$4/bin/install_pypi_pkg.sh" flake8 DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" pytest DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" jetzt DEV "$4"
+    source "$4/bin/install_pypi_pkg.sh" jupyter PROD "$4"
+    source "$4/bin/install_pypi_pkg.sh" pandas PROD "$4"
+    source "$4/bin/install_pypi_pkg.sh" matplotlib PROD "$4"
+    source "$4/bin/install_pypi_pkg.sh" seaborn PROD "$4"
     # As of 9.4.2019 the fix is no longer needed.
     # Fix the current (as of 5.3.2019) issue with Tornado 6.x
     # https://github.com/jupyter/notebook/issues/2664
@@ -74,6 +74,7 @@ fi
 
 echo "Project dir is $1/$2"
 echo "Running $pythonversion"
+python "$4/update_metadata.py" runtime___"$pythonversion" project_path___"$(pwd)"
 
 # Unset variables (otherwise remembers them on the same terminal session in future runs!)
 unset pythonversion

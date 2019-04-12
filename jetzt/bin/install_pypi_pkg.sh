@@ -4,6 +4,10 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
+# echo $1
+# echo $2
+# echo $3
+
 req_file='requirements.txt'
 if [[ "$2" == "DEV" ]]
 then
@@ -21,15 +25,14 @@ contains() {
     fi
 }
 
-echo "Finding if package ${GREEN}$1${NC} is already installed..."
-INSTALLEDPKG=$(pip freeze | grep -iwF "$1" | awk '{split($0,a,"=="); print a[1]}')
+echo "Checking if package ${GREEN}$1${NC} is already installed..."
 
-if echo "$INSTALLEDPKG" | grep -iwF "$1"; then
-    echo "${GREEN}Package $INSTALLEDPKG is already installed.${NC}"
+if python "$3/check_if_installed.py" package___"$1" dep_type___"$2"; then
+    echo "${GREEN}Package $INSTALLEDPKG is already installed as $2 dependency.${NC}"
 else
-    echo "Installing package ${GREEN}$1${NC} as $1 dependency..."
+    echo "Package is not installed. Installing package ${GREEN}$1${NC} as $2 dependency..."
 
-    if pip install $1; then
+    if pip install -U $1; then
         if contains $1 "=="; then
             pip freeze | grep -iF "$1" >> $req_file
         else
@@ -41,3 +44,5 @@ else
         echo "${RED}Installation of package $1 failed. See error above.${NC}"
     fi
 fi
+
+python "$3/update_metadata.py" package___"$1" package_with_version___"$(pip freeze | grep -iF "$1")" dep_type___"$2"

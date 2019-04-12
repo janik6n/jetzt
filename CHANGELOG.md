@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2019-04-12
+
+### Added
+
+### Changed
+
+### Removed
+
+- A couple of debug prints were removed.
+
+### Fixed
+
+## [0.3.0] - 2019-04-12
+
+### Added
+
+- A new `jetzt_metadata.json` is introduced. This file will be used to maintain project metadata including installed dependencies. **UNFORTUNATELY THIS INTRODUCES BREAKING CHANGES**. You need to scaffold a new project, install dependencies again, and finally move your code manually from prior projects.
+- Ability to list outdated dependencies. The ability to actually install the updates is coming soon.
+
+### Changed
+
+- Jetzt is no longer depending on `requirements.txt` and `requirements-dev.txt` for dependency management, `jetzt_metadata.json` is used instead.
+
+### Removed
+
+### Fixed
+
+
 ## [0.2.1] - 2019-04-12
 
 ### Added

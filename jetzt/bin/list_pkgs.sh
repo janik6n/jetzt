@@ -4,11 +4,11 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
-echo "${GREEN}Listing installed Python packages${NC}:"
+echo "Installed dependencies:"
 echo ""
-echo "From ${GREEN}requirements.txt${NC}:"
-cat requirements.txt
+echo "${GREEN}PROD dependencies${NC}:"
+python "$1/list_installed.py" dep_type___PROD
 
 echo ""
-echo "From ${GREEN}requirements-dev.txt${NC}:"
-cat requirements-dev.txt
+echo "${GREEN}DEV dependencies${NC}:"
+python "$1/list_installed.py" dep_type___DEV

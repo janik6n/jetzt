@@ -29,7 +29,9 @@ Things should probably work nicely on other releases of macOS and on various Lin
 [A changelog](https://github.com/janikarh/jetzt/blob/master/CHANGELOG.md) is maintained.
 
 - [Create project](#create-new-project)
-- [Install Python packages](#manage-python-packages)
+- [Manage Python packages](#manage-python-packages)
+  - [Install a package](#install-a-package)
+  - [List installed packages](#list-installed-packages)
 
 ## Create new project
 
@@ -46,6 +48,8 @@ Each project will have the following packages installed as *development dependen
 - jetzt
 
 These will be listed in `requirements-dev.txt`.
+
+A metadata file `jetzt_metadata.json` is maintained, and this will be used to manage the project metadata, including installed dependencies.
 
 #### Python - [Blank]
 

@@ -1,4 +1,5 @@
 import os
+import json
 import pathlib
 import subprocess
 import sys
@@ -11,7 +12,12 @@ from colorama import Fore, init
 init(autoreset=True)
 
 
-def run_scaffold(jetzt_home=None, app_path=None):
+def dump_jetzt_metadata(jetzt_metadata, dump_file):
+    with open(dump_file, 'w') as dump:
+        json.dump(jetzt_metadata, dump, indent=2, ensure_ascii=False)
+
+
+def run_scaffold(jetzt_home=None, app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
     cli = SlidePrompt(
         [
             Input("What is the name of your project? ",
@@ -48,8 +54,6 @@ def run_scaffold(jetzt_home=None, app_path=None):
     if (len(project_name) < 1):
         sys.exit(Fore.RED + 'The project_name should contain at least one character.')
 
-    print(f"TASSA: {os.getcwd()}")
-
     ''' Let's validate paths. '''
     if os.path.exists(jetzt_home) and os.path.isdir(jetzt_home):
         os.chdir(jetzt_home)
@@ -60,8 +64,11 @@ def run_scaffold(jetzt_home=None, app_path=None):
         # Create project root
         os.mkdir(project_name)
 
+    jetzt_metadata['project_name'] = project_name
+    jetzt_metadata['project_type'] = project_type
+    dump_jetzt_metadata(jetzt_metadata, f"{project_name}/{jetzt_metadata_file}")
+
     ''' Call a shell script to install packages etc. '''
-    print(f"Calling scaffold:\n{jetzt_home}\n{project_name}\n{project_type}\n{app_path}")
     subprocess.call(f'source {app_path}/bin/jetzt_scaffold.sh {jetzt_home} {project_name} "{project_type}" "{app_path}"', shell=True)
 
     print(Fore.GREEN + 'Scaffold complete.')
@@ -70,7 +77,7 @@ def run_scaffold(jetzt_home=None, app_path=None):
     sys.exit()
 
 
-def run_install(app_path):
+def run_install(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
     prompt_pkg_name = 'What package from PyPI would you like to install (single pkg)? '
     prompt_dep_type = 'PROD or DEV dependency? '
     cli = SlidePrompt(
@@ -103,22 +110,34 @@ def run_install(app_path):
     if (len(pkg_name) < 1):
         sys.exit(Fore.RED + 'The PyPI package name to be installed should contain at least one character.')
 
-    subprocess.call(f'source {app_path}/bin/install_pypi_pkg.sh "{pkg_name}" "{dep_type}"', shell=True)
+    subprocess.call(f'source {app_path}/bin/install_pypi_pkg.sh "{pkg_name}" "{dep_type}" "{app_path}"', shell=True)
     sys.exit()
 
 
-def run_list(app_path=None):
+def run_list(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
     subprocess.call(f'source {app_path}/bin/list_pkgs.sh {app_path}', shell=True)
+    sys.exit()
+
+
+def run_list_outdated(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
+    subprocess.call(f'source {app_path}/bin/list_outdated_pkgs.sh {app_path}', shell=True)
     sys.exit()
 
 
 @click.command()
 @click.option('--scaffold', 'command', flag_value='scaffold', help='Scaffold a new project.')
 @click.option('--install', 'command', flag_value='install', help='Install a new package from PyPI.')
-@click.option('--list', 'command', flag_value='list', help='List installed packages.')
+@click.option('--list', 'command', flag_value='list', help='List installed dependencies.')
+@click.option('--list-outdated', 'command', flag_value='list_outdated', help='List outdated dependencies.')
 def app(command):
     # Directory, where the command is run.
     jetzt_home = os.getcwd()
+
+    jetzt_metadata_file = 'jetzt_metadata.json'
+    jetzt_metadata = {}
+    if os.path.exists(jetzt_metadata_file):
+        with open(jetzt_metadata_file) as jetzt_metadata_f:
+            jetzt_metadata = json.load(jetzt_metadata_f)
 
     # This file's (installed) path.
     app_path = pathlib.Path(os.path.dirname(os.path.realpath(__file__)))
@@ -128,11 +147,13 @@ def app(command):
 
     command = command.lower()
     if command == 'scaffold':
-        run_scaffold(jetzt_home, app_path)
+        run_scaffold(jetzt_home, app_path, jetzt_metadata, jetzt_metadata_file)
     elif command == 'install':
-        run_install(app_path)
+        run_install(app_path, jetzt_metadata, jetzt_metadata_file)
     elif command == 'list':
-        run_list(app_path)
+        run_list(app_path, jetzt_metadata, jetzt_metadata_file)
+    elif command == 'list_outdated':
+        run_list_outdated(app_path, jetzt_metadata, jetzt_metadata_file)
     else:
         sys.exit(Fore.RED + f'Unknown command: {command}. See available commands with --help.')
 
