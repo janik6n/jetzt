@@ -92,7 +92,15 @@ To install a package `requests`, run `jetzt --install` and follow the prompt. Yo
 Example of `requirements.txt`:
 
 ```
-requests>=2.18.4
+requests>=2.21.0
+```
+
+#### Version pinning:
+
+To install a specific version of a package, add the version, just as you would with pip. For example: `requests==2.20.1`. This will pin the version in `requirements.txt` like so:
+
+```
+requests==2.20.1
 ```
 
 ### List installed packages

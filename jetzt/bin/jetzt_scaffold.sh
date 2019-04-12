@@ -25,7 +25,7 @@ then
     source "$4/bin/install_pypi_pkg.sh" flake8 DEV
     source "$4/bin/install_pypi_pkg.sh" pytest DEV
     source "$4/bin/install_pypi_pkg.sh" jetzt DEV
-    echo "" > requirements.txt
+    # echo "" > requirements.txt
 elif [[ "$3" == "Python - Flask" ]]
 then
     echo "${GREEN}Installing requirements for a Flask project...${NC}"
