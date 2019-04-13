@@ -39,10 +39,9 @@ else
             pip freeze | grep -iF "$1" | awk '{gsub("==", ">=", $0); print}' >> $req_file
         fi
 
+        python "$3/update_metadata.py" package___"$1" package_with_version___"$(pip freeze | grep -iF "$1")" dep_type___"$2"
         echo "${GREEN}Installation of package $1 is ready. Added $1 to $req_file.${NC}"
     else
         echo "${RED}Installation of package $1 failed. See error above.${NC}"
     fi
 fi
-
-python "$3/update_metadata.py" package___"$1" package_with_version___"$(pip freeze | grep -iF "$1")" dep_type___"$2"

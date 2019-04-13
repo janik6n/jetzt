@@ -71,15 +71,17 @@ def main():
 
     if actionable_count == 0:
         print("All dependencies are up to date.")
+        if 'pending_dependency_updates' in metadata:
+            metadata['pending_dependency_updates'][dependencies] = {}
     else:
-        metadata['pending_dependency_updates'] = {}
+        if 'pending_dependency_updates' not in metadata:
+            metadata['pending_dependency_updates'] = {}
         metadata['pending_dependency_updates'][dependencies] = updates
-
-        ''' Dump updated metadata. '''
-        with open(metadata_filename, 'w') as dump:
-            json.dump(metadata, dump, indent=2, ensure_ascii=False)
-
         print('You can install the updates with "jetzt --update"')
+
+    ''' Dump updated metadata. '''
+    with open(metadata_filename, 'w') as dump:
+        json.dump(metadata, dump, indent=2, ensure_ascii=False)
 
     if delete_pip_json == 'DeletePipJson':
         os.remove(pip_json)

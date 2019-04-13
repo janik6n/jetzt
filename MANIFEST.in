@@ -4,4 +4,5 @@ include jetzt/bin/jetzt_scaffold.sh
 include jetzt/bin/install_pypi_pkg.sh
 include jetzt/bin/list_pkgs.sh
 include jetzt/bin/list_outdated_pkgs.sh
+include jetzt/bin/update_pypi_pkg.sh
 graft jetzt/seeds

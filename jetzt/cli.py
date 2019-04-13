@@ -1,6 +1,7 @@
 import os
 import json
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -119,8 +120,60 @@ def run_list(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_meta
     sys.exit()
 
 
-def run_list_outdated(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
+def run_outdated(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
     subprocess.call(f'source {app_path}/bin/list_outdated_pkgs.sh {app_path}', shell=True)
+    sys.exit()
+
+
+def run_update(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
+    prompt_pkg_name = 'Which of these would you like to update? '
+
+    pkg_list = []
+
+    ''' Read existing metadata if available. '''
+    if os.path.exists(jetzt_metadata_file):
+        with open(jetzt_metadata_file) as metadata_file:
+            metadata = json.load(metadata_file)
+
+    if 'pending_dependency_updates' in metadata:
+        if 'dependencies' in metadata['pending_dependency_updates']:
+            for key, value in metadata['pending_dependency_updates']['dependencies'].items():
+                pkg_list.append(f"[PROD] {value['package']}: {value['installed_version']} > {value['latest_version']}")
+        if 'dev_dependencies' in metadata['pending_dependency_updates']:
+            for key, value in metadata['pending_dependency_updates']['dev_dependencies'].items():
+                pkg_list.append(f"[DEV] {value['package']}: {value['installed_version']} > {value['latest_version']}")
+
+    cli = SlidePrompt(
+        [
+            Bullet(prompt_pkg_name,
+                   choices=pkg_list,
+                   bullet=" >",
+                   margin=2,
+                   bullet_color=colors.bright(colors.foreground["cyan"]),
+                   background_on_switch=colors.background["black"],
+                   word_color=colors.foreground["white"],
+                   word_on_switch=colors.foreground["white"]),
+        ]
+    )
+
+    result = cli.launch()
+    cli.summarize()
+
+    pkg_name = ''
+    pkg_to_update = ''
+    dep_type = ''
+
+    for result_item in result:
+        key, value = result_item
+        if key == prompt_pkg_name:
+            pkg_name = value
+
+    match_object = re.match(r'^\[(?P<dep_type>\w+)\]\s+(?P<pkg_to_update>\w+):.*$', pkg_name)
+    if match_object:
+        dep_type = match_object.group('dep_type')
+        pkg_to_update = match_object.group('pkg_to_update')
+
+    subprocess.call(f'source {app_path}/bin/update_pypi_pkg.sh "{pkg_to_update}" "{dep_type}" "{app_path}" ', shell=True)
     sys.exit()
 
 
@@ -128,7 +181,8 @@ def run_list_outdated(app_path=None, jetzt_metadata=None, jetzt_metadata_file='j
 @click.option('--scaffold', 'command', flag_value='scaffold', help='Scaffold a new project.')
 @click.option('--install', 'command', flag_value='install', help='Install a new package from PyPI.')
 @click.option('--list', 'command', flag_value='list', help='List installed dependencies.')
-@click.option('--list-outdated', 'command', flag_value='list_outdated', help='List outdated dependencies.')
+@click.option('--outdated', 'command', flag_value='outdated', help='List outdated dependencies.')
+@click.option('--update', 'command', flag_value='update', help='Update an outdated dependency, based on "jetzt --outdated".')
 def app(command):
     # Directory, where the command is run.
     jetzt_home = os.getcwd()
@@ -152,8 +206,10 @@ def app(command):
         run_install(app_path, jetzt_metadata, jetzt_metadata_file)
     elif command == 'list':
         run_list(app_path, jetzt_metadata, jetzt_metadata_file)
-    elif command == 'list_outdated':
-        run_list_outdated(app_path, jetzt_metadata, jetzt_metadata_file)
+    elif command == 'outdated':
+        run_outdated(app_path, jetzt_metadata, jetzt_metadata_file)
+    elif command == 'update':
+        run_update(app_path, jetzt_metadata, jetzt_metadata_file)
     else:
         sys.exit(Fore.RED + f'Unknown command: {command}. See available commands with --help.')
 

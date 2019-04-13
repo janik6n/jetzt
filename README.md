@@ -29,13 +29,15 @@ Things should probably work nicely on other releases of macOS and on various Lin
 [A changelog](https://github.com/janikarh/jetzt/blob/master/CHANGELOG.md) is maintained.
 
 - [Create project](#create-new-project)
-- [Manage Python packages](#manage-python-packages)
-  - [Install a package](#install-a-package)
-  - [List installed packages](#list-installed-packages)
+- [Manage Python packages](#manage-python-dependencies)
+  - [Install a dependency](#install-a-dependency)
+  - [List installed dependencies](#list-installed-dependencies)
+  - [List outdated dependencies](#list-outdated-dependencies)
+  - [Update outdated dependency](#update-outdated-dependency)
 
 ## Create new project
 
-Run `jetzt --scaffold` and follow the prompt. **Make sure**, you have set *environment variable* `JETZT_HOME` to point to a directory, which will hold the individual projects.
+Run `jetzt --scaffold` in the directory, where you want to place your project directory, and follow the prompt.
 
 ### Scaffolding options
 
@@ -49,7 +51,7 @@ Each project will have the following packages installed as *development dependen
 
 These will be listed in `requirements-dev.txt`.
 
-A metadata file `jetzt_metadata.json` is maintained, and this will be used to manage the project metadata, including installed dependencies.
+A metadata file `jetzt_metadata.json` is maintained, and this will be used to manage the project metadata, including installed dependencies. This should be committed to git along with the rest of the project files.
 
 #### Python - [Blank]
 
@@ -78,13 +80,13 @@ Also a `data`-directory will be created, and [this notebook](https://github.com/
 
 After scaffolding, start a jupyter server by running `jupyter-notebook` in the project root directory.
 
-## Manage Python packages
+## Manage Python dependencies
 
-There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
+All project and dependency management takes place in a *virtualenv* (created with `jetzt --scaffold`), so make sure you have activated the project's environment before running these commands. There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
 
-*Jetzt* includes an option to install and manage packages for you. Please read the following examples:
+*Jetzt* includes an option to install and manage the dependencies for you. Please continue reading.
 
-### Install a package
+### Install a dependency
 
 To install a package `requests`, run `jetzt --install` and follow the prompt. You have an option to install the package as *a production dependency* or as *a development dependency*. What does all this mean, you might ask? Jetzt will:
 
@@ -99,18 +101,24 @@ Example of `requirements.txt`:
 requests>=2.21.0
 ```
 
-#### Version pinning:
-
-To install a specific version of a package, add the version, just as you would with pip. For example: `requests==2.20.1`. This will pin the version in `requirements.txt` like so:
+**Version pinning:** To install a specific version of a package, add the version, just as you would with pip. For example: `requests==2.20.1`. This will pin the version in `requirements.txt` like so:
 
 ```
 requests==2.20.1
 ```
 
-### List installed packages
+### List installed dependencies
 
-To list installed packages, run `jetzt --list`.
+To list installed dependencies, run `jetzt --list`.
 
+
+### List outdated dependencies
+
+To list outdated dependencies, run `jetzt --outdated`.
+
+### Update outdated dependency
+
+To update an outdated dependency, run `jetzt --update`. This will allow you to choose an outdated dependency to update. After the update, the command will update the outdated dependency list automatically.
 
 ## License
 
