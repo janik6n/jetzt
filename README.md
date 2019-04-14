@@ -28,12 +28,14 @@ Things should probably work nicely on other releases of macOS and on various Lin
 
 [A changelog](https://github.com/janikarh/jetzt/blob/master/CHANGELOG.md) is maintained.
 
-- [Create project](#create-new-project)
-- [Manage Python packages](#manage-python-dependencies)
+- [Create new project](#create-new-project)
+- [Manage Python dependencies](#manage-python-dependencies)
   - [Install a dependency](#install-a-dependency)
   - [List installed dependencies](#list-installed-dependencies)
   - [List outdated dependencies](#list-outdated-dependencies)
   - [Update outdated dependency](#update-outdated-dependency)
+  - [Remove installed dependency](#remove-installed-dependency)
+  - [Create requirements files](#create-requirements-files)
 
 ## Create new project
 
@@ -82,7 +84,7 @@ After scaffolding, start a jupyter server by running `jupyter-notebook` in the p
 
 ## Manage Python dependencies
 
-All project and dependency management takes place in a *virtualenv* (created with `jetzt --scaffold`), so make sure you have activated the project's environment before running these commands. There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
+All dependency management takes place in a *virtualenv* (created with `jetzt --scaffold`), so **make sure you have activated the project's environment before running these commands with `source venv/bin/activate`**. There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
 
 *Jetzt* includes an option to install and manage the dependencies for you. Please continue reading.
 
@@ -119,6 +121,14 @@ To list outdated dependencies, run `jetzt --outdated`.
 ### Update outdated dependency
 
 To update an outdated dependency, run `jetzt --update`. This will allow you to choose an outdated dependency to update. After the update, the command will update the outdated dependency list automatically.
+
+### Remove installed dependency
+
+To remove an installed dependency, run `jetzt --remove`. This will list all installed dependencies, and let's you choose which one you want to remove. After the update, the command will update the outdated dependency list automatically.
+
+### Create requirements files
+
+Run `jetzt --create-requirements` to generate standard `requirements.txt` and `requirements-dev.txt` based on `jetzt_metadata.json`.
 
 ## License
 

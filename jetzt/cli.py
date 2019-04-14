@@ -177,12 +177,69 @@ def run_update(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_me
     sys.exit()
 
 
+def run_remove(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
+    prompt_pkg_name = 'Which of these would you like to remove? '
+
+    pkg_list = []
+
+    ''' Read existing metadata if available. '''
+    if os.path.exists(jetzt_metadata_file):
+        with open(jetzt_metadata_file) as metadata_file:
+            metadata = json.load(metadata_file)
+
+    if 'dependencies' in metadata:
+        for key, value in metadata['dependencies'].items():
+            pkg_list.append(f"[PROD] {key}")
+    if 'dev_dependencies' in metadata:
+        for key, value in metadata['dev_dependencies'].items():
+            pkg_list.append(f"[DEV] {key}")
+
+    cli = SlidePrompt(
+        [
+            Bullet(prompt_pkg_name,
+                   choices=pkg_list,
+                   bullet=" >",
+                   margin=2,
+                   bullet_color=colors.bright(colors.foreground["cyan"]),
+                   background_on_switch=colors.background["black"],
+                   word_color=colors.foreground["white"],
+                   word_on_switch=colors.foreground["white"]),
+        ]
+    )
+
+    result = cli.launch()
+    cli.summarize()
+
+    pkg_name = ''
+    pkg_to_remove = ''
+    dep_type = ''
+
+    for result_item in result:
+        key, value = result_item
+        if key == prompt_pkg_name:
+            pkg_name = value
+
+    match_object = re.match(r'^\[(?P<dep_type>\w+)\]\s+(?P<pkg_to_update>\w+).*$', pkg_name)
+    if match_object:
+        dep_type = match_object.group('dep_type')
+        pkg_to_remove = match_object.group('pkg_to_update')
+
+    subprocess.call(f'source {app_path}/bin/remove_pkg.sh "{pkg_to_remove}" "{dep_type}" "{app_path}" ', shell=True)
+    sys.exit()
+
+
+def run_create_requirements(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
+    subprocess.call(f'source {app_path}/bin/create_reqs.sh {app_path}', shell=True)
+    sys.exit()
+
 @click.command()
 @click.option('--scaffold', 'command', flag_value='scaffold', help='Scaffold a new project.')
 @click.option('--install', 'command', flag_value='install', help='Install a new package from PyPI.')
 @click.option('--list', 'command', flag_value='list', help='List installed dependencies.')
 @click.option('--outdated', 'command', flag_value='outdated', help='List outdated dependencies.')
 @click.option('--update', 'command', flag_value='update', help='Update an outdated dependency, based on "jetzt --outdated".')
+@click.option('--remove', 'command', flag_value='remove', help='Remove installed dependency.')
+@click.option('--create-requirements', 'command', flag_value='create_requirements', help='Create requirements.txt and requirements-dev.txt.')
 def app(command):
     # Directory, where the command is run.
     jetzt_home = os.getcwd()
@@ -210,6 +267,10 @@ def app(command):
         run_outdated(app_path, jetzt_metadata, jetzt_metadata_file)
     elif command == 'update':
         run_update(app_path, jetzt_metadata, jetzt_metadata_file)
+    elif command == 'remove':
+        run_remove(app_path, jetzt_metadata, jetzt_metadata_file)
+    elif command == 'create_requirements':
+        run_create_requirements(app_path, jetzt_metadata, jetzt_metadata_file)
     else:
         sys.exit(Fore.RED + f'Unknown command: {command}. See available commands with --help.')
 

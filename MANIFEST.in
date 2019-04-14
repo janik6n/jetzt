@@ -5,4 +5,6 @@ include jetzt/bin/install_pypi_pkg.sh
 include jetzt/bin/list_pkgs.sh
 include jetzt/bin/list_outdated_pkgs.sh
 include jetzt/bin/update_pypi_pkg.sh
+include jetzt/bin/remove_pkg.sh
+include jetzt/bin/create_reqs.sh
 graft jetzt/seeds
