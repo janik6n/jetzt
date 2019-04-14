@@ -6,6 +6,7 @@ metadata_filename = 'jetzt_metadata.json'
 metadata = {}
 
 dep_type = ''
+silent = False
 
 ''' Read existing metadata if available. '''
 if os.path.exists(metadata_filename):
@@ -18,6 +19,9 @@ for arg in sys.argv:
         key, value = arg.split('___')
         if key == 'dep_type':
             dep_type = value
+        elif key == 'silent':
+            if value == 'YES':
+                silent = True
     argv_count += 1
 
 ''' List installed packages from metadata. '''
@@ -27,12 +31,14 @@ if dep_type == 'PROD':
         if 'dependencies' in metadata:
             if isinstance(metadata['dependencies'], dict):
                 for key, value in metadata['dependencies'].items():
-                    print(f"{key}{value}")
+                    if not silent:
+                        print(f"{key}{value}")
                     f.write(f"{key}{value}\n")
 else:
     with open('requirements-dev.txt', 'w') as f:
         if 'dev_dependencies' in metadata:
             if isinstance(metadata['dev_dependencies'], dict):
                 for key, value in metadata['dev_dependencies'].items():
-                    print(f"{key}{value}")
+                    if not silent:
+                        print(f"{key}{value}")
                     f.write(f"{key}{value}\n")

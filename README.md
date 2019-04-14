@@ -35,6 +35,7 @@ Things should probably work nicely on other releases of macOS and on various Lin
   - [List outdated dependencies](#list-outdated-dependencies)
   - [Update outdated dependency](#update-outdated-dependency)
   - [Remove installed dependency](#remove-installed-dependency)
+  - [Reinstall all dependencies](#reinstall-all-dependencies)
   - [Create requirements files](#create-requirements-files)
 
 ## Create new project
@@ -125,6 +126,10 @@ To update an outdated dependency, run `jetzt --update`. This will allow you to c
 ### Remove installed dependency
 
 To remove an installed dependency, run `jetzt --remove`. This will list all installed dependencies, and let's you choose which one you want to remove. After the update, the command will update the outdated dependency list automatically.
+
+### Reinstall all dependencies
+
+To reinstall all dependencies (excluding editable), run `jetzt --reinstall`. *Make sure, you are in active virtualenv.*
 
 ### Create requirements files
 

@@ -228,6 +228,37 @@ def run_remove(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_me
     sys.exit()
 
 
+def run_reinstall(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
+    prompt_are_you_sure = 'Are you sure, you want to reinstall all dependencies? Are you sure, you are in an active virtualenv? '
+
+    cli = SlidePrompt(
+        [
+            Bullet(prompt_are_you_sure,
+                   choices=['No', 'Yes'],
+                   bullet=" >",
+                   margin=2,
+                   bullet_color=colors.bright(colors.foreground["cyan"]),
+                   background_on_switch=colors.background["black"],
+                   word_color=colors.foreground["white"],
+                   word_on_switch=colors.foreground["white"]),
+        ]
+    )
+
+    result = cli.launch()
+    cli.summarize()
+
+    choice = 'No'
+
+    for result_item in result:
+        key, value = result_item
+        if key == prompt_are_you_sure:
+            choice = value
+
+    if choice == 'Yes':
+        subprocess.call(f'source {app_path}/bin/reinstall_reqs.sh "{app_path}"', shell=True)
+    sys.exit()
+
+
 def run_create_requirements(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_metadata.json'):
     subprocess.call(f'source {app_path}/bin/create_reqs.sh {app_path}', shell=True)
     sys.exit()
@@ -239,6 +270,7 @@ def run_create_requirements(app_path=None, jetzt_metadata=None, jetzt_metadata_f
 @click.option('--outdated', 'command', flag_value='outdated', help='List outdated dependencies.')
 @click.option('--update', 'command', flag_value='update', help='Update an outdated dependency, based on "jetzt --outdated".')
 @click.option('--remove', 'command', flag_value='remove', help='Remove installed dependency.')
+@click.option('--reinstall', 'command', flag_value='reinstall', help='Reinstall all installed dependencies (excluding editable).')
 @click.option('--create-requirements', 'command', flag_value='create_requirements', help='Create requirements.txt and requirements-dev.txt.')
 def app(command):
     # Directory, where the command is run.
@@ -269,6 +301,8 @@ def app(command):
         run_update(app_path, jetzt_metadata, jetzt_metadata_file)
     elif command == 'remove':
         run_remove(app_path, jetzt_metadata, jetzt_metadata_file)
+    elif command == 'reinstall':
+        run_reinstall(app_path, jetzt_metadata, jetzt_metadata_file)
     elif command == 'create_requirements':
         run_create_requirements(app_path, jetzt_metadata, jetzt_metadata_file)
     else:
