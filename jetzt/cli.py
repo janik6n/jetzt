@@ -263,6 +263,7 @@ def run_create_requirements(app_path=None, jetzt_metadata=None, jetzt_metadata_f
     subprocess.call(f'source {app_path}/bin/create_reqs.sh {app_path}', shell=True)
     sys.exit()
 
+
 @click.command()
 @click.option('--scaffold', 'command', flag_value='scaffold', help='Scaffold a new project.')
 @click.option('--install', 'command', flag_value='install', help='Install a new package from PyPI.')

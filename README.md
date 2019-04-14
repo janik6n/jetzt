@@ -129,7 +129,7 @@ To remove an installed dependency, run `jetzt --remove`. This will list all inst
 
 ### Reinstall all dependencies
 
-To reinstall all dependencies (excluding editable), run `jetzt --reinstall`. *Make sure, you are in active virtualenv.*
+To reinstall all dependencies (excluding editable), run `jetzt --reinstall`. The dependency versions are pinned temporarily for installation, so yo will end up with the same version as before the reinstallation. *Make sure, you are in active virtualenv.*
 
 ### Create requirements files
 

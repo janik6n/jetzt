@@ -7,6 +7,7 @@ metadata = {}
 
 dep_type = ''
 silent = False
+force_version_pin = False
 
 ''' Read existing metadata if available. '''
 if os.path.exists(metadata_filename):
@@ -22,6 +23,9 @@ for arg in sys.argv:
         elif key == 'silent':
             if value == 'YES':
                 silent = True
+        elif key == 'versionpin':
+            if value == 'YES':
+                force_version_pin = True
     argv_count += 1
 
 ''' List installed packages from metadata. '''
@@ -31,6 +35,8 @@ if dep_type == 'PROD':
         if 'dependencies' in metadata:
             if isinstance(metadata['dependencies'], dict):
                 for key, value in metadata['dependencies'].items():
+                    if force_version_pin:
+                        value = value.replace('>=', '==')
                     if not silent:
                         print(f"{key}{value}")
                     f.write(f"{key}{value}\n")
@@ -39,6 +45,8 @@ else:
         if 'dev_dependencies' in metadata:
             if isinstance(metadata['dev_dependencies'], dict):
                 for key, value in metadata['dev_dependencies'].items():
+                    if force_version_pin:
+                        value = value.replace('>=', '==')
                     if not silent:
                         print(f"{key}{value}")
                     f.write(f"{key}{value}\n")
