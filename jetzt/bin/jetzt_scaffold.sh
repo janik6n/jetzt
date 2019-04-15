@@ -5,10 +5,11 @@
 # echo $3
 # echo $4
 
-# https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m' # No Color
+RED="`tput setaf 1`"
+GREEN="`tput setaf 2`"
+CYAN="`tput setaf 6`"
+BOLD="`tput bold`"
+NC="`tput sgr0`"
 
 echo "${GREEN}Creating Python virtual environment and upgrading pip & setuptools...${NC}"
 cd "$1/$2"

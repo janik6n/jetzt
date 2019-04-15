@@ -14,17 +14,20 @@ This is a tiny tool built to automate repetitive manual tasks, when creating a n
 1. A new *virtualenv* named `venv` under the project directory with the System-level installed Python 3.6+ version.
 1. The virtualenv will have `pip` and `setuptools` installed and updated to latest available versions.
 1. Additional packages will be installed based on the selected project type.
-1. Depending on the project type, other resources may be created to initialize a new project.
+1. Depending on the project type, other resources may be created to initialize a new project (all from within this repo).
 
 ## Prerequisites
 
-This has been tested on the following setup:
+This has been tested on the following setups:
 
 1. MacOS Sierra 10.12.6 and newer
-1. Python 3.6+ (installed via *Homebrew*)
-1. Zsh shell (with oh-my-zsh)
+    1. Python 3.6+ (installed via *Homebrew*)
+    1. Zsh shell (with oh-my-zsh)
+1. Fedora 29
+    1. Python 3.6+
+    1. Bash and Bourne shells
 
-Things should probably work nicely on other releases of macOS and on various Linux distros too. **Python 3.6+ and zsh are expected.**
+Things should probably work nicely on older releases of macOS / OS X and on various Linux distros too. **Python 3.6+ is expected.**
 
 [A changelog](https://github.com/janikarh/jetzt/blob/master/CHANGELOG.md) is maintained.
 

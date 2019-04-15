@@ -1,8 +1,10 @@
 #!/usr/local/bin/zsh
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m' # No Color
+RED="`tput setaf 1`"
+GREEN="`tput setaf 2`"
+CYAN="`tput setaf 6`"
+BOLD="`tput bold`"
+NC="`tput sgr0`"
 
 echo "Reinstalling all dependencies (with temporary version pinning for all dependencies)..."
 echo ""
