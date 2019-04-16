@@ -168,7 +168,7 @@ def run_update(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_me
         if key == prompt_pkg_name:
             pkg_name = value
 
-    match_object = re.match(r'^\[(?P<dep_type>\w+)\]\s+(?P<pkg_to_update>\w+):.*$', pkg_name)
+    match_object = re.match(r'^\[(?P<dep_type>\w+)\]\s+(?P<pkg_to_update>[\w\-]+):.*$', pkg_name)
     if match_object:
         dep_type = match_object.group('dep_type')
         pkg_to_update = match_object.group('pkg_to_update')
@@ -219,10 +219,10 @@ def run_remove(app_path=None, jetzt_metadata=None, jetzt_metadata_file='jetzt_me
         if key == prompt_pkg_name:
             pkg_name = value
 
-    match_object = re.match(r'^\[(?P<dep_type>\w+)\]\s+(?P<pkg_to_update>\w+).*$', pkg_name)
+    match_object = re.match(r'^\[(?P<dep_type>\w+)\]\s+(?P<pkg_to_remove>[\w\-]+).*$', pkg_name)
     if match_object:
         dep_type = match_object.group('dep_type')
-        pkg_to_remove = match_object.group('pkg_to_update')
+        pkg_to_remove = match_object.group('pkg_to_remove')
 
     subprocess.call(f'source {app_path}/bin/remove_pkg.sh "{pkg_to_remove}" "{dep_type}" "{app_path}" ', shell=True)
     sys.exit()
