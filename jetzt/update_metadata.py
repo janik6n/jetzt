@@ -46,8 +46,20 @@ if action == 'REMOVE':
                 print(f"Could not remove dependency {package} from jetzt_metadata.json ({dependencies}/{package}), please remove manually.")
 
 elif action == 'INSTALL':
-    ''' Installing a new dependency. '''
-    installed_package, installed_version = re.split("==|>=", package_with_version)  # package==0.13.2
+    '''
+    Installing a new dependency.
+
+    As of now, the variable may contain more than one package. E.g. with jupyterlab:
+    - package_with_version: "jupyterlab==0.35.5\njupyterlab-server==0.2.0"
+    - need to split by linefeed and check, if the name matches.
+    '''
+    found_packages = package_with_version.split('\n')
+
+    for found_package in found_packages:
+        installed_package, installed_version = re.split("==|>=", found_package)  # package==0.13.2
+        if package == installed_package:
+            break
+
     # Pinned version
     if '==' in package:
         installed_version = f"=={installed_version}"

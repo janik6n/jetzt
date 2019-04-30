@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.4] - 2019-04-30
+
+### Added
+
+### Changed
+
+### Removed
+
+### Fixed
+
+- Fixed a bug while installing a package (updating jetzt_metadata.json). The bug occured e.g. with jupyterlab which also installs jupyterlab-server as a dependency. Thus, the package name failed to resolve while validating installation.
+- Tweaked README.
+
 ## [0.6.3] - 2019-04-16
 
 ### Added

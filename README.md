@@ -88,7 +88,7 @@ After scaffolding, start a jupyter server by running `jupyter-notebook` in the p
 
 ## Manage Python dependencies
 
-All dependency management takes place in a *virtualenv* (created with `jetzt --scaffold`), so **make sure you have activated the project's environment before running these commands with `source venv/bin/activate`**. There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
+All dependency management takes place within a *virtualenv* (created with `jetzt --scaffold`), so **make sure you have activated the project's environment before running these commands with `source venv/bin/activate`**. There is naturally the standard way of using *pip* to install dependencies, and manually add them to `requirements.txt`, etc.
 
 *Jetzt* includes an option to install and manage the dependencies for you. Please continue reading.
 
@@ -97,17 +97,17 @@ All dependency management takes place in a *virtualenv* (created with `jetzt --s
 To install a package `requests`, run `jetzt --install` and follow the prompt. You have an option to install the package as *a production dependency* or as *a development dependency*. What does all this mean, you might ask? Jetzt will:
 
 1. Install the package *requests* (latest available version).
-2. Add the package `requests` to `requirements.txt` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added. If you selected `DEV` as a dependency type, the file `requirements-dev.txt` will be used instead.
+2. Add the package `requests` to `jetzt_metadata.json` with a version requirement set to minimum of the currently installed version. The packages, which *requests* depends on, are *not* added. You can install a dependency as a `DEV` dependency too.
 
 **At the moment, you can only install one package at a time.**
 
-Example of `requirements.txt`:
+Example of a defined dependency with a version (as a installation requirement, or as seen in `jetzt_metadata.json`):
 
 ```
 requests>=2.21.0
 ```
 
-**Version pinning:** To install a specific version of a package, add the version, just as you would with pip. For example: `requests==2.20.1`. This will pin the version in `requirements.txt` like so:
+**Version pinning:** To install a specific version of a package, add the version, just as you would with pip. For example: `requests==2.20.1`. This will pin the version like so:
 
 ```
 requests==2.20.1
