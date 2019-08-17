@@ -15,7 +15,7 @@ echo "${GREEN}Creating Python virtual environment and upgrading pip & setuptools
 cd "$1/$2"
 python3 -m venv venv
 source 'venv/bin/activate'
-pip install -U pip
+python -m pip install --upgrade pip
 pip install -U setuptools
 echo "${GREEN}Pip & setuptools upgraded to latest versions.${NC}"
 pythonversion=$(python -V)
