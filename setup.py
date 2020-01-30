@@ -14,7 +14,9 @@ EMAIL = 'janikarh@gmail.com'
 AUTHOR = 'Jani Karhunen'
 REQUIRES_PYTHON = '>=3.6.0'
 
-REQUIRED = ['bullet', 'click', 'colorama']
+REQUIRED = ['Click>=7.0,<8.0',
+            'bullet>=2.1.0,<3.0.0',
+            'colorama>=0.3.9,<=0.4.3']
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
